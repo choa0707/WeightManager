@@ -23,6 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <Button
+                android:id="@+id/breakfastButton"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="메뉴추가"/>
@@ -36,6 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <Button
+                android:id="@+id/launchButton"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="메뉴추가"/>
@@ -49,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <Button
+                android:id="@+id/dinnerButton"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="메뉴추가"/>
@@ -58,10 +61,12 @@
                 android:layout_height="wrap_content"
                 android:text="간식"/>
         <android.support.v7.widget.RecyclerView
+
                 android:id="@+id/foodmanagerFragment_listview_snak"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <Button
+                android:id="@+id/snackButton"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="메뉴추가"/>

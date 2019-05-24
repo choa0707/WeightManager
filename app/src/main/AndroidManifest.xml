@@ -9,18 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".model.ProfileActivity"></activity>
+        <activity android:name=".model.SearchFood"></activity>
+        <activity android:name=".model.AddFood" />
+        <activity android:name=".model.ProfileActivity" />
         <activity
             android:name=".model.MainActivity"
-            android:label="@string/title_activity_main" ><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:label="@string/title_activity_main">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
-
-        <activity android:name=".model.StartActivity">
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".model.StartActivity" />
     </application>
 
 </manifest>
