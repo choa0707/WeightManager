@@ -18,7 +18,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="아침"/>
-            <ListView
+            <android.support.v7.widget.RecyclerView
                 android:id="@+id/foodmanagerFragment_listview_breakfast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="점심"/>
-            <ListView
+        <android.support.v7.widget.RecyclerView
 
                 android:id="@+id/foodmanagerFragment_listview_launch"
                 android:layout_width="match_parent"
@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="저녁"/>
-            <ListView
+        <android.support.v7.widget.RecyclerView
                 android:id="@+id/foodmanagerFragment_listview_dinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="간식"/>
-            <ListView
+        <android.support.v7.widget.RecyclerView
                 android:id="@+id/foodmanagerFragment_listview_snak"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
