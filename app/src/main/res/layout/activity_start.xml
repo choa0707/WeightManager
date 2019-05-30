@@ -8,41 +8,39 @@
     android:orientation="vertical"
     android:layout_marginVertical="30dp"
     android:gravity="center">
+    <LinearLayout
 
-    <ImageView
+        android:background="@drawable/b"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:src="@drawable/startactivity_image"
+        android:layout_height="320dp"></LinearLayout>
 
-       />
+
 
     <Button
+        android:background="@drawable/downweight_button"
         android:id="@+id/weight_down"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:layout_marginHorizontal="80dp"
-        android:text="체중감량"
         />
 
     <Button
+        android:background="@drawable/weight_button"
         android:id="@+id/weight_maintain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginHorizontal="80dp"
-        android:text="체중유지"
-       />
+        />
 
     <Button
+        android:background="@drawable/upweight_button"
         android:id="@+id/weight_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginHorizontal="80dp"
-        android:text="체중증가"
-     />
+        />
 
 </LinearLayout>

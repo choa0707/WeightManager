@@ -39,7 +39,6 @@ public class ProfileActivity extends AppCompatActivity {
         Intent intent = getIntent();
         goal  = intent.getExtras().getInt("weightLevel");
         mDate = (DatePicker)findViewById(R.id.datepicker);
-        mTxtDate = (TextView)findViewById(R.id.txtdate);
         cancel = (Button)findViewById(R.id.cancel);
         register = (Button)findViewById(R.id.register);
         name = (EditText)findViewById(R.id.name);
@@ -52,21 +51,15 @@ public class ProfileActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
         mDate.init(mDate.getYear(), mDate.getMonth(), mDate.getDayOfMonth(), new DatePicker.OnDateChangedListener() {
-                    //값이 바뀔때마다 텍스트뷰의 값을 바꿔준다.
-                    @Override
-                    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        // TODO Auto-generated method stub
-                        //monthOfYear는 0값이 1월을 뜻하므로 1을 더해줌 나머지는 같다.
-                        mTxtDate.setText(String.format("%d/%d/%d", year,monthOfYear + 1, dayOfMonth));
-                    }
-        });
-        findViewById(R.id.btnnow).setOnClickListener(new View.OnClickListener() {
+            //값이 바뀔때마다 텍스트뷰의 값을 바꿔준다.
             @Override
-            public void onClick(View v) {
-                String result = String.format("%d년 %d월 %d일", mDate.getYear(), mDate.getMonth() + 1, mDate.getDayOfMonth());
-                Toast.makeText(ProfileActivity.this, result, Toast.LENGTH_SHORT).show();
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                // TODO Auto-generated method stub
+                //monthOfYear는 0값이 1월을 뜻하므로 1을 더해줌 나머지는 같다.
+                mTxtDate.setText(String.format("%d/%d/%d", year,monthOfYear + 1, dayOfMonth));
             }
         });
+
         cancel.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -78,8 +71,6 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
-
                 sqlDB = myDBHelper.getWritableDatabase();
                 //String updateQuery = "INSERT INTO User VALUES ("+name+","+name+"0, 1996/03/29,"+s_height+","+s_weight+",1,1,1);";
                 String updateQuery = "INSERT INTO User VALUES (2, '123', '123', 0, 1996-03-29, 168.2, 62.3, 1, 1, 1);";

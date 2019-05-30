@@ -15,45 +15,99 @@
         android:textSize="20sp"
         android:layout_weight="1"
         android:text="음식 등록"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="8sp"
-        android:layout_gravity="left"
-        android:text="기준 : 100g"/>
-    <LinearLayout
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_weight="9">
 
-        <EditText
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="음식이름:"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/editText_foodName"
+            app:layout_constraintBottom_toTopOf="@+id/textView_standard"
+            />
+        <EditText
+            android:id="@+id/editText_foodName"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/editText_standard"
             android:hint="음식이름 : "/>
+        <TextView
+            android:id="@+id/textView_standard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="기준량:"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/editText_standard"
+            app:layout_constraintBottom_toTopOf="@+id/textView_kcal"/>
         <EditText
+            android:id="@+id/editText_standard"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/editText_kcal"/>
+        <TextView
+            android:id="@+id/textView_kcal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/editText_kcal"
+            app:layout_constraintBottom_toTopOf="@id/textView_carb"
+            android:text="칼로리: "/>
+        <EditText
+            android:id="@+id/editText_kcal"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="칼로리 : "/>
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/editText_carb"/>
+        <TextView
+            android:id="@+id/textView_carb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/editText_carb"
+            app:layout_constraintBottom_toTopOf="@id/textView_fat"
+            android:text="탄수화물: "/>
         <EditText
+            android:id="@+id/editText_carb"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="탄수화물 : "/>
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/editText_fat"/>
+        <TextView
+            android:id="@+id/textView_fat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/editText_fat"
+            app:layout_constraintBottom_toTopOf="@id/textView_protein"
+            android:text="지방: "/>
         <EditText
+            android:id="@+id/editText_fat"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="지방 : "/>
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/editText_protein"/>
+        <TextView
+            android:id="@+id/textView_protein"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="단백질: "/>
         <EditText
+            android:id="@+id/editText_protein"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="단백질 : "/>
-    </LinearLayout>
+            app:layout_constraintRight_toRightOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -62,13 +116,16 @@
         android:orientation="horizontal"
         >
         <Button
+            android:background="@drawable/basic_button"
             android:id="@+id/addfoodActivity_cancel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginRight="5dp"
             android:text="취소"
             />
         <Button
+            android:background="@drawable/basic_button"
             android:id="@+id/addfoodActivity_register"
             android:layout_width="0dp"
             android:layout_height="match_parent"
