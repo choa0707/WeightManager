@@ -1,13 +1,16 @@
 package com.example.weightmanager.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.weightmanager.R;
+import com.example.weightmanager.model.DetailInfoActivity;
 
 import java.util.ArrayList;
 
@@ -49,6 +52,14 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
     public void onBindViewHolder(SimpleTextAdapter.ViewHolder holder, int position) {
         String text = mData.get(position) ;
         holder.textView1.setText(text) ;
+
+        holder.textView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //데이터넘겨서 detail창 보여주기
+
+            }
+        });
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.
