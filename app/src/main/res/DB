@@ -1,0 +1,57 @@
+
+-- User Table Create SQL
+CREATE TABLE User(user_id      INTEGER    PRIMARY KEY AUTOINCREMENT,
+ name       VARCHAR(45)    NULL, nickname     VARCHAR(45)    NULL,
+ gender       INT            NULL,  birth       DATE           NULL,
+    heigh       DOUBLE         NULL,     weight     DOUBLE         NULL,
+        goal       INT            NULL,     goal_weight  DOUBLE         NULL,
+           goal_kcal    DOUBLE         NULL,
+             age  INT         NULL);
+
+
+-- Food Table Create SQL
+CREATE TABLE Food
+(
+    food_id  INTEGER    PRIMARY KEY AUTOINCREMENT,
+    name     VARCHAR(45)    NULL,
+    kcal     DOUBLE         NULL,
+    carb     DOUBLE         NULL,
+    protein  DOUBLE         NULL,
+    fat      DOUBLE         NULL
+);
+
+
+-- Board Table Create SQL
+CREATE TABLE Board
+(
+    `board_id`   INTEGER    PRIMARY KEY AUTOINCREMENT,
+    `goal`         INT             NULL,
+    `title`        VARCHAR(45)     NULL,
+    `text`         VARCHAR(500)    NULL,
+    `create_date`  DATETIME        NULL,
+    PRIMARY KEY (board_id)
+);
+
+
+-- Foodset Table Create SQL
+CREATE TABLE Foodset
+(
+    `foodset_id`  INTEGER    PRIMARY KEY AUTOINCREMENT,
+    `user_id`     INT     NULL,
+    `food_id`     INT     NULL,
+    `date`        DATE    NULL,
+    `timing`      INT     NULL,
+    PRIMARY KEY (foodset_id),
+   FOREIGN KEY (food_id)    REFERENCES Food (food_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+   FOREIGN KEY (user_id)     REFERENCES User (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+-- Water Table Create SQL
+CREATE TABLE Water
+(
+    `water_id` INTEGER    PRIMARY KEY AUTOINCREMENT,
+    `user_id`   INT     NULL,
+    `date`      DATE    NULL,
+    `amount`    INT     NULL,
+    PRIMARY KEY (water_id),
+ FOREIGN KEY (user_id) REFERENCES User (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT
+);

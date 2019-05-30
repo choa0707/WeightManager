@@ -19,7 +19,14 @@
             android:textColor="#00ff00"
             android:textCursorDrawable="@null"
             />
-
+        <EditText
+            android:id="@+id/age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="나이"
+            android:textColor="#00ff00"
+            android:textCursorDrawable="@null"
+            />
         <EditText
             android:id="@+id/weight"
             android:layout_width="match_parent"

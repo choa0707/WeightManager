@@ -9,20 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".model.DetailInfoActivity"></activity>
-        <activity android:name=".model.SearchFood" />
-        <activity android:name=".model.AddFood" />
-        <activity android:name=".model.ProfileActivity" />
-        <activity
-            android:name=".model.MainActivity"
-            android:label="@string/title_activity_main">
+        <activity android:name=".model.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".model.StartActivity" />
+        <activity android:name=".model.DetailInfoActivity" />
+        <activity android:name=".model.SearchFood" />
+        <activity android:name=".model.AddFood" />
+        <activity android:name=".model.ProfileActivity" />
+        <activity
+            android:name=".model.MainActivity"
+            android:label="@string/title_activity_main"></activity>
+        <activity android:name=".model.StartActivity">
+
+        </activity>
     </application>
 
 </manifest>
