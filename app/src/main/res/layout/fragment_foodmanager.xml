@@ -9,67 +9,103 @@
         android:orientation="vertical">
 
         <TextView
+            android:textSize="20dp"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="아형님의 하루 권장 섭취량은 1054kcal입니다."
             />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="아침"/>
+                android:background="@drawable/morning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/foodmanagerFragment_listview_breakfast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <Button
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/addmenu_button"
                 android:id="@+id/breakfastButton"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="메뉴추가"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="점심"/>
-        <android.support.v7.widget.RecyclerView
+                android:layout_height="30dp"
+                />
+        </LinearLayout>
 
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:background="@drawable/lunch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <android.support.v7.widget.RecyclerView
                 android:id="@+id/foodmanagerFragment_listview_launch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <Button
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/addmenu_button"
                 android:id="@+id/launchButton"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="메뉴추가"/>
+                android:layout_height="30dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
+                android:background="@drawable/dinner"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="저녁"/>
-        <android.support.v7.widget.RecyclerView
+                />
+            <android.support.v7.widget.RecyclerView
                 android:id="@+id/foodmanagerFragment_listview_dinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <Button
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/addmenu_button"
                 android:id="@+id/dinnerButton"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="메뉴추가"/>
+                android:layout_height="30dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="간식"/>
-        <android.support.v7.widget.RecyclerView
-
+                android:background="@drawable/snack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <android.support.v7.widget.RecyclerView
                 android:id="@+id/foodmanagerFragment_listview_snak"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <Button
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/addmenu_button"
                 android:id="@+id/snackButton"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="메뉴추가"/>
+                android:layout_height="30dp"
+                />
+        </LinearLayout>
+
+
 
         <TextView
             android:layout_width="match_parent"
