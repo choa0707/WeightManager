@@ -12,15 +12,22 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:id="@+id/edit_search"
         android:hint="음식 검색하기"
         android:gravity="center"
         android:layout_weight="1"
-        android:layout_marginHorizontal="80dp"/>
+        android:layout_marginHorizontal="80dp"
+        android:layout_marginBottom="20dp"/>
 
-    <android.support.v7.widget.RecyclerView
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"/>
+        android:layout_weight="8"
+        android:id="@+id/search_food_listview"
+        android:dividerHeight="1dp"
+        android:divider="#999999">
+
+    </ListView>
     <Button
         android:background="@drawable/basic_button"
         android:id="@+id/addfoodButton"
@@ -28,6 +35,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_marginHorizontal="80dp"
-        android:text="+ 음식 추가하기"/>
+        android:text="+ 음식 추가하기"
+        android:layout_marginBottom="20dp"/>
 
 </LinearLayout>

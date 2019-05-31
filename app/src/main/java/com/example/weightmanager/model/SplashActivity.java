@@ -30,39 +30,16 @@ public class SplashActivity extends AppCompatActivity {
 
         if (cursor.getCount() == 0)
         {
-            firstLoading();
+            Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+            startActivity(intent);
+            finish();
         }
         else
         {
-            continueLoading();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
         }
 
     }
-    private void firstLoading()
-    {
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        }, 2000);
-    }
-    private void continueLoading()
-    {
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        }, 2000);
-    }
-
 }
