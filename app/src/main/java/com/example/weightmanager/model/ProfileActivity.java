@@ -28,7 +28,7 @@ public class ProfileActivity extends AppCompatActivity {
     Button register;
     EditText name, weight, height, goal_weight, age;
     private String s_name;
-    private String s_birth, gender;
+    private String s_birth, gender, waterTime;
     private double s_weight, s_height, s_goal_weight, s_goal_kcal;
     private int s_gender, s_age;
     long now = System.currentTimeMillis();
@@ -43,7 +43,7 @@ public class ProfileActivity extends AppCompatActivity {
         myDBHelper = new MyDBHelper(this);
 
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         goal  = intent.getExtras().getInt("weightLevel");
         mDate = (DatePicker)findViewById(R.id.datepicker);
         cancel = (Button)findViewById(R.id.cancel);
@@ -55,7 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
         goal_weight = (EditText)findViewById(R.id.goal_weight);
         SimpleDateFormat currentTime = new SimpleDateFormat("yyyy/M/d");
         s_birth = currentTime.format(date);
-
+        waterTime = new String(s_birth);
         final Spinner spinner = (Spinner) findViewById(R.id.gender_spinner);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.gender, android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);
@@ -105,9 +105,14 @@ public class ProfileActivity extends AppCompatActivity {
                     //Log.d("dbtest", updateQuery);
                     //Toast.makeText(ProfileActivity.this, updateQuery, Toast.LENGTH_SHORT).show();
 
-                        sqlDB.execSQL(updateQuery);
+                    sqlDB.execSQL(updateQuery);
+                    sqlDB.execSQL("INSERT INTO Water (user_id, date, amount) VALUES (1, '"+s_birth+"', 0)");
 
                     sqlDB.close();
+
+                    Intent intent2;
+                    intent2 = new Intent(getApplicationContext(), SplashActivity.class);
+                    startActivity(intent2);
                 }catch (NumberFormatException e)
                 {
                     Toast.makeText(ProfileActivity.this, "모든 항목을 입력해주세요.", Toast.LENGTH_LONG).show();

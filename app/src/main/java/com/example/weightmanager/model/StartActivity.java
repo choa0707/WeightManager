@@ -17,6 +17,7 @@ public class StartActivity extends AppCompatActivity {
     Button button_weightmaintain;
     Button button_weightdown;
     private int weightLevel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

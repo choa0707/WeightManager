@@ -52,7 +52,6 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
     public void onBindViewHolder(SimpleTextAdapter.ViewHolder holder, int position) {
         String text = mData.get(position) ;
         holder.textView1.setText(text) ;
-
         holder.textView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

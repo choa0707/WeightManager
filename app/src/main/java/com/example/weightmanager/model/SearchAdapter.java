@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.weightmanager.R;
 
@@ -40,7 +41,7 @@ public class SearchAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup viewGroup) {
+    public View getView(final int position, View convertView, ViewGroup viewGroup) {
         if(convertView == null){
             convertView = inflate.inflate(R.layout.listview_searchfood,null);
 
@@ -58,11 +59,17 @@ public class SearchAdapter extends BaseAdapter {
 
         // 리스트에 있는 데이터를 리스트뷰 셀에 뿌림.
         viewHolder.foodName.setText(list.get(position).name);
-        viewHolder.foodKcal.setText(Integer.toString((int) list.get(position).kcal));
-        viewHolder.foodCarb.setText(Integer.toString((int) list.get(position).carb));
-        viewHolder.foodFat.setText(Integer.toString((int) list.get(position).fat));
-        viewHolder.foodProtein.setText(Integer.toString((int) list.get(position).protein));
+        viewHolder.foodKcal.setText(Integer.toString((int) list.get(position).kcal)+"kcal");
+        viewHolder.foodCarb.setText(Integer.toString((int) list.get(position).carb)+"g");
+        viewHolder.foodFat.setText(Integer.toString((int) list.get(position).fat)+"g");
+        viewHolder.foodProtein.setText(Integer.toString((int) list.get(position).protein)+"g");
 
+   //     convertView.setOnClickListener(new View.OnClickListener() {
+     //       @Override
+      //      public void onClick(View v) {
+        //        Toast.makeText(context, list.get(position).name, Toast.LENGTH_LONG).show();
+          //  }
+        //});
 
         return convertView;
     }

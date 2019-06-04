@@ -10,10 +10,12 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/oneday_kcal"
             android:textSize="20dp"
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
             android:text="아형님의 하루 권장 섭취량은 1054kcal입니다."
             />
         <LinearLayout
@@ -109,6 +111,7 @@
 
 
         <TextView
+            android:id="@+id/total_kcal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
