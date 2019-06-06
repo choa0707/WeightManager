@@ -75,7 +75,7 @@ public class ProfileFragment extends Fragment {
             //값이 바뀔때마다 텍스트뷰의 값을 바꿔준다.
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                
+
                 //monthOfYear는 0값이 1월을 뜻하므로 1을 더해줌 나머지는 같다.
                 s_birth = String.format("%d/%d/%d", year,monthOfYear + 1, dayOfMonth);
             }

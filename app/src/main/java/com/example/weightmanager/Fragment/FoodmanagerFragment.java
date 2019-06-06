@@ -37,6 +37,7 @@ public class FoodmanagerFragment extends Fragment {
     String userName, s_oneday_kcal;
     TextView total,oneday;
     View fragmentView;
+    String foodName, foodKcal, foodString;
     MyDBHelper myDBHelper;
     SQLiteDatabase sqlDB;
     String[] breakfastMenu, launchMenu, dinnerMenu, snackMenu;
@@ -120,6 +121,7 @@ public class FoodmanagerFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext())) ;
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
         SimpleTextAdapter adapter = new SimpleTextAdapter(list1) ;
+        delete(recyclerView, adapter, list1, 1);
         recyclerView.setAdapter(adapter) ;
     }
     private void setlaunch() {
@@ -134,6 +136,8 @@ public class FoodmanagerFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext())) ;
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
         SimpleTextAdapter adapter = new SimpleTextAdapter(list1) ;
+
+      delete(recyclerView, adapter, list1, 2);
         recyclerView.setAdapter(adapter) ;
     }
     private void setDinner() {
@@ -148,6 +152,7 @@ public class FoodmanagerFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext())) ;
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
         SimpleTextAdapter adapter = new SimpleTextAdapter(list1) ;
+        delete(recyclerView, adapter, list1, 3);
         recyclerView.setAdapter(adapter) ;
     }
     private void setSnack() {
@@ -162,9 +167,52 @@ public class FoodmanagerFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext())) ;
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
         SimpleTextAdapter adapter = new SimpleTextAdapter(list1) ;
+        //삭제 함수
+        delete(recyclerView, adapter, list1, 4);
+
         recyclerView.setAdapter(adapter) ;
     }
+    public void delete(final RecyclerView recyclerView, final SimpleTextAdapter adapter, final ArrayList<String> list1, final int ttiming)
+    {
+        adapter.setItemClick(new SimpleTextAdapter.ItemClick() {
+            @Override
+            public void onClick(View view, int position) {
+                //음식 텍스트 받아오기(ex. rice 300kcal)
+                //split하여 음식 이름과 칼로리 받아오기
+                //음식 이름과 칼로리와 일치하는 food_id받아오기
+                //food_id를 가지고 있고 timing이 클릭한 timing(아점저간)과 일치하는 foodset 데이터 삭제
+                //삭제후 세로고침.
+                foodString = list1.get(position);
+                String[] foodSplit1 = foodString.split("  ");
+                foodName = foodSplit1[0];
+                foodKcal = foodSplit1[1];
+                String[] foodSplit2 = foodKcal.split(" ");
+                foodKcal = foodSplit2[0];
 
+                Log.d("testest", foodName);
+                Log.d("testest", foodKcal);
+
+                String deleteFoodid = "SELECT food_id FROM Food WHERE name = '"+foodName+"';";
+                Cursor deletecursor = (Cursor)sqlDB.rawQuery(deleteFoodid, null);
+                deletecursor.moveToFirst();
+                int food_id = deletecursor.getInt(0);
+
+                String deleteQuery = "SELECT foodset_id FROM Foodset WHERE timing = "+ttiming+" and food_id = "+food_id+";";
+                deletecursor = (Cursor)sqlDB.rawQuery(deleteQuery, null);
+                deletecursor.moveToFirst();
+                int foodset_id = deletecursor.getInt(0);
+
+                deleteQuery = "DELETE FROM Foodset WHERE foodset_id = "+foodset_id+";";
+                sqlDB.execSQL(deleteQuery);
+                Toast.makeText(getContext(), "삭제 되었습니다.", Toast.LENGTH_SHORT).show();
+                list1.remove(position);
+               recyclerView.removeViewAt(position);
+                adapter.notifyItemRemoved(position);
+                adapter.notifyItemRangeChanged(position, list1.size());
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
     @Override
     public void onResume() {
         count_breakfast = 0;
@@ -175,6 +223,7 @@ public class FoodmanagerFragment extends Fragment {
         breakfastMenu = new String[100];
         launchMenu = new String[100];
         dinnerMenu = new String[100];
+        snackMenu = new String[100];
 
         myDBHelper = new MyDBHelper(getContext());
         sqlDB = myDBHelper.getReadableDatabase();
@@ -237,12 +286,18 @@ public class FoodmanagerFragment extends Fragment {
         total.setText(Integer.toString((int) total_kcal)+" kcal");
 
         cursor.close();
-        sqlDB.close();
+
         setBreakfast();
         setlaunch();
         setDinner();
         setSnack();
 
         super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        sqlDB.close();
+        super.onDestroy();
     }
 }

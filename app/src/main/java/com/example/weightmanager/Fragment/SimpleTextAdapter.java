@@ -15,8 +15,15 @@ import com.example.weightmanager.model.DetailInfoActivity;
 import java.util.ArrayList;
 
 public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.ViewHolder> {
-
+    private ItemClick itemClick;
     private ArrayList<String> mData = null ;
+    String text;
+    public interface ItemClick {
+        public void onClick(View view,int position);
+    }
+    public void setItemClick(ItemClick itemClick) {
+        this.itemClick = itemClick;
+    }
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -49,14 +56,16 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
 
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
-    public void onBindViewHolder(SimpleTextAdapter.ViewHolder holder, int position) {
-        String text = mData.get(position) ;
+    public void onBindViewHolder(SimpleTextAdapter.ViewHolder holder, final int position) {
+         text = mData.get(position) ;
         holder.textView1.setText(text) ;
         holder.textView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //데이터넘겨서 detail창 보여주기
 
+                if(itemClick != null){
+                    itemClick.onClick(v, position);
+                }
             }
         });
     }
@@ -66,4 +75,5 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
     public int getItemCount() {
         return mData.size() ;
     }
+
 }
