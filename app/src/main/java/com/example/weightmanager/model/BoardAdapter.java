@@ -67,9 +67,21 @@ public class BoardAdapter extends BaseAdapter {
         // 리스트에 있는 데이터를 리스트뷰 셀에 뿌림.
         viewHolder.boardTitle.setText(list.get(position).title);
         viewHolder.boardText.setText(list.get(position).text);
+        if (Integer.parseInt(list.get(position).imageUrl) == 1)
+        {
+            viewHolder.imageUri.setImageResource(R.drawable.infoimage_2);
+        } else if (Integer.parseInt(list.get(position).imageUrl) == 0)
+        {
+            viewHolder.imageUri.setImageResource(R.drawable.infoimage_1);
+        }else if (Integer.parseInt(list.get(position).imageUrl) == -1)
+        {
+            viewHolder.imageUri.setImageResource(R.drawable.infoimage_0);
+        }
+
         String path = list.get(position).imageUrl;
+
         //"/sdcard/Images/test_image.jpg"
-        try{
+       /* try{
             //File imgFile = new  File("/sdcard/image1.jpg");
             String test= Environment.getExternalStorageDirectory().getAbsolutePath()+"/";
             Bitmap bitmap = BitmapFactory.decodeFile(test + path);
@@ -80,7 +92,7 @@ public class BoardAdapter extends BaseAdapter {
         {
             Log.d("image", "이미지 실패");
             Toast.makeText(convertView.getContext(), "이미지가 없습니다.", Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
         return convertView;
     }

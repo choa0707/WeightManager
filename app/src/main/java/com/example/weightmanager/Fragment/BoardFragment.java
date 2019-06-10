@@ -27,7 +27,7 @@ public class BoardFragment extends Fragment {
 
     MyDBHelper myDBHelper;
     SQLiteDatabase sqlDB;
-
+    private int goal;
     private List<BoardData> list;          // 데이터를 넣은 리스트변수
     private ListView listView;          // 검색을 보여줄 리스트변수
     private BoardAdapter adapter;      // 리스트뷰에 연결할 아답터
@@ -61,8 +61,14 @@ public class BoardFragment extends Fragment {
     private void settingList() {
         myDBHelper = new MyDBHelper(getContext());
         sqlDB = myDBHelper.getReadableDatabase();
-        String sqlSelect = "SELECT * FROM Board";
-        Cursor cursor = (Cursor) sqlDB.rawQuery(sqlSelect, null);
+
+        String getgoal = "SELECT goal FROM User;";
+        Cursor cursor = (Cursor) sqlDB.rawQuery(getgoal, null);
+        cursor.moveToFirst();
+        goal = cursor.getInt(0);
+
+        String sqlSelect = "SELECT * FROM Board WHERE goal = "+goal+";";
+        cursor = (Cursor) sqlDB.rawQuery(sqlSelect, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             BoardData getBoardData = new BoardData();
