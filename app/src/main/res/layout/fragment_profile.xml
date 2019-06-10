@@ -85,22 +85,24 @@
             android:textColor="#00ff00"
             android:textCursorDrawable="@null"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
 
             <Button
                 android:background="@drawable/basic_button"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:id="@+id/register"
-                android:layout_marginLeft="5dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_marginHorizontal="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
                 android:text="수정하기"/>
 
-        </LinearLayout>
+        <Button
+            android:background="@drawable/basic_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/delete"
+            android:text="회원 탈퇴"
+            android:layout_marginBottom="10dp"/>
 
     </LinearLayout>
 

@@ -1,6 +1,8 @@
 package com.example.weightmanager.Fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -37,6 +39,7 @@ public class FoodmanagerFragment extends Fragment {
     String userName, s_oneday_kcal;
     TextView total,oneday;
     View fragmentView;
+    int delete_pos;
     String foodName, foodKcal, foodString;
     MyDBHelper myDBHelper;
     SQLiteDatabase sqlDB;
@@ -177,6 +180,11 @@ public class FoodmanagerFragment extends Fragment {
         adapter.setItemClick(new SimpleTextAdapter.ItemClick() {
             @Override
             public void onClick(View view, int position) {
+
+                AlertDialog.Builder builder =new AlertDialog.Builder(getContext());
+                delete_pos = position;
+
+
                 //음식 텍스트 받아오기(ex. rice 300kcal)
                 //split하여 음식 이름과 칼로리 받아오기
                 //음식 이름과 칼로리와 일치하는 food_id받아오기
@@ -189,27 +197,42 @@ public class FoodmanagerFragment extends Fragment {
                 String[] foodSplit2 = foodKcal.split(" ");
                 foodKcal = foodSplit2[0];
 
+                builder.setTitle("삭제");
+                builder.setMessage(foodName+"을 삭제하시겠습니까?");
+
                 Log.d("testest", foodName);
                 Log.d("testest", foodKcal);
 
-                String deleteFoodid = "SELECT food_id FROM Food WHERE name = '"+foodName+"';";
-                Cursor deletecursor = (Cursor)sqlDB.rawQuery(deleteFoodid, null);
-                deletecursor.moveToFirst();
-                int food_id = deletecursor.getInt(0);
+                builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String deleteFoodid = "SELECT food_id FROM Food WHERE name = '"+foodName+"';";
+                        Cursor deletecursor = (Cursor)sqlDB.rawQuery(deleteFoodid, null);
+                        deletecursor.moveToFirst();
+                        int food_id = deletecursor.getInt(0);
 
-                String deleteQuery = "SELECT foodset_id FROM Foodset WHERE timing = "+ttiming+" and food_id = "+food_id+";";
-                deletecursor = (Cursor)sqlDB.rawQuery(deleteQuery, null);
-                deletecursor.moveToFirst();
-                int foodset_id = deletecursor.getInt(0);
+                        String deleteQuery = "SELECT foodset_id FROM Foodset WHERE timing = "+ttiming+" and food_id = "+food_id+";";
+                        deletecursor = (Cursor)sqlDB.rawQuery(deleteQuery, null);
+                        deletecursor.moveToFirst();
+                        int foodset_id = deletecursor.getInt(0);
 
-                deleteQuery = "DELETE FROM Foodset WHERE foodset_id = "+foodset_id+";";
-                sqlDB.execSQL(deleteQuery);
-                Toast.makeText(getContext(), "삭제 되었습니다.", Toast.LENGTH_SHORT).show();
-                list1.remove(position);
-               recyclerView.removeViewAt(position);
-                adapter.notifyItemRemoved(position);
-                adapter.notifyItemRangeChanged(position, list1.size());
-                adapter.notifyDataSetChanged();
+                        deleteQuery = "DELETE FROM Foodset WHERE foodset_id = "+foodset_id+";";
+                        sqlDB.execSQL(deleteQuery);
+                        Toast.makeText(getContext(), "삭제 되었습니다.", Toast.LENGTH_SHORT).show();
+                        list1.remove(delete_pos);
+                        recyclerView.removeViewAt(delete_pos);
+                        adapter.notifyItemRemoved(delete_pos);
+                        adapter.notifyItemRangeChanged(delete_pos, list1.size());
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+                builder.setNegativeButton("취소",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                builder.show();
             }
         });
     }

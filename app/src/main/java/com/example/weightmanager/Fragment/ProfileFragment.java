@@ -33,7 +33,7 @@ public class ProfileFragment extends Fragment {
     DatePicker mDate;
     TextView mTxtDate;
     int goal;
-    Button cancel;
+    Button deleteButton;
     Button register;
     EditText name, weight, height, goal_weight, age;
     private String s_name;
@@ -58,7 +58,7 @@ public class ProfileFragment extends Fragment {
         sqlDB = myDBHelper.getWritableDatabase();
 
         mDate = (DatePicker)fragmentView.findViewById(R.id.datepicker);
-        cancel = (Button)fragmentView.findViewById(R.id.cancel);
+        deleteButton = (Button)fragmentView.findViewById(R.id.delete);
         register = (Button)fragmentView.findViewById(R.id.register);
         name = (EditText)fragmentView.findViewById(R.id.name);
         weight = (EditText)fragmentView.findViewById(R.id.weight);
@@ -100,7 +100,24 @@ public class ProfileFragment extends Fragment {
         age.setHint(Double.toString(hint_age));
 
 
+        deleteButton.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+                String deleteUser = "DROP TABLE User;";
+                sqlDB.execSQL(deleteUser);
+                deleteUser = "DROP TABLE Food;";
+                sqlDB.execSQL(deleteUser);
+                deleteUser = "DROP TABLE Foodset;";
+                sqlDB.execSQL(deleteUser);
+                deleteUser = "DROP TABLE Water;";
+                sqlDB.execSQL(deleteUser);
+                deleteUser = "DROP TABLE Board;";
+                sqlDB.execSQL(deleteUser);
+                Intent intent = new Intent(getActivity(), SplashActivity.class);
+                startActivity(intent);
+            }
+        });
         register.setOnClickListener(new View.OnClickListener(){
 
             @Override
