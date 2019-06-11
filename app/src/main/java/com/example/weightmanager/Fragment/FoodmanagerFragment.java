@@ -224,6 +224,7 @@ public class FoodmanagerFragment extends Fragment {
                         adapter.notifyItemRemoved(delete_pos);
                         adapter.notifyItemRangeChanged(delete_pos, list1.size());
                         adapter.notifyDataSetChanged();
+                        onResume();
                     }
                 });
                 builder.setNegativeButton("취소",
