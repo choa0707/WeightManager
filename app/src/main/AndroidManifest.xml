@@ -17,7 +17,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".model.DetailInfoActivity" />
         <activity android:name=".model.SearchFood" />
         <activity android:name=".model.AddFood" />
         <activity android:name=".model.ProfileActivity" />

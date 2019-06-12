@@ -44,7 +44,9 @@ public class SearchFood extends AppCompatActivity {
         setContentView(R.layout.activity_search_food);
 
         Intent intent = getIntent();
+
         timing  = intent.getExtras().getInt("timing");
+
 
         addfoodButton = (Button) findViewById(R.id.addfoodButton);
         editSearch = (EditText) findViewById(R.id.edit_search);
@@ -92,6 +94,7 @@ public class SearchFood extends AppCompatActivity {
             public void onClick(View v) {
                 //값받게 resultfor로 바꿀예정
                 Intent intent = new Intent(getApplicationContext(), AddFood.class);
+                intent.putExtra("timing",timing);
                 startActivity(intent);
                 finish();
             }

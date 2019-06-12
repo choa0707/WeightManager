@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!--아침, 점심, 저녁, 간식 각각의 음식을 담을 리스트 리사이클러뷰를 이용-->
             <TextView
                 android:background="@drawable/morning"
                 android:layout_width="wrap_content"

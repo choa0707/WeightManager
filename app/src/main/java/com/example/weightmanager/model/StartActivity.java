@@ -11,12 +11,10 @@ import com.example.weightmanager.R;
 
 public class StartActivity extends AppCompatActivity {
 
-    MyDBHelper myDBHelper;
-    SQLiteDatabase sqlDB;
-    Button button_weightup;
-    Button button_weightmaintain;
-    Button button_weightdown;
-    private int weightLevel;
+    Button button_weightup;//체중증가버튼
+    Button button_weightmaintain;//체중유지버튼
+    Button button_weightdown;//체중감소버튼
+    private int weightLevel;//인텐트로 넘길때 값을 넣어두기 위한 변수
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +22,12 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
 
 
-        myDBHelper =new MyDBHelper(this);
+        //객체화
         button_weightup = (Button) findViewById(R.id.weight_up);
         button_weightmaintain = (Button)findViewById(R.id.weight_maintain);
         button_weightdown = (Button)findViewById(R.id.weight_down);
 
+        //체중증가, 유지, 감량 버튼을 눌었을 경우 weightLevel에 구별값 넣고, changeActivity함수 호출
         button_weightup.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -53,8 +52,9 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void ChangeActivity() {
-        Intent intent = new Intent(StartActivity.this, ProfileActivity.class);
+        Intent intent = new Intent(StartActivity.this, ProfileActivity.class);//프로필등록하는 화면을 넘어감
         intent.putExtra("weightLevel", weightLevel);
         startActivity(intent);
+        finish();
     }
 }

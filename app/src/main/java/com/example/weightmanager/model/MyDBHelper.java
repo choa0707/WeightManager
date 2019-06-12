@@ -17,7 +17,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-
+        //테이블이 존재하지 않으면 만들어줌
         db.execSQL("CREATE TABLE IF NOT EXISTS User(user_id      INTEGER    PRIMARY KEY AUTOINCREMENT, name       VARCHAR(45)    , nickname     VARCHAR(45)    , gender       INT            ,  birth       DATE           ,     heigh       DOUBLE         ,     weight     DOUBLE         ,     goal       INT            ,     goal_weight  DOUBLE         ,     goal_kcal    DOUBLE         ," +
                 "age INT );");
         db.execSQL("CREATE TABLE IF NOT EXISTS Food" +

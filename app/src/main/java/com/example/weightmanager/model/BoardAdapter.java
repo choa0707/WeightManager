@@ -67,32 +67,35 @@ public class BoardAdapter extends BaseAdapter {
         // 리스트에 있는 데이터를 리스트뷰 셀에 뿌림.
         viewHolder.boardTitle.setText(list.get(position).title);
         viewHolder.boardText.setText(list.get(position).text);
-        if (Integer.parseInt(list.get(position).imageUrl) == 1)
+
+        String imageName = list.get(position).imageUrl;
+        String test= "/sdcard/Download/";
+        String path  = test+"infoimage_"+imageName+".jpg";
+        File fileCheck = new File(path);
+        if(fileCheck.exists())
         {
-            viewHolder.imageUri.setImageResource(R.drawable.infoimage_2);
-        } else if (Integer.parseInt(list.get(position).imageUrl) == 0)
+            Log.d("image", "success to get from sd card");
+
+            Bitmap bitmap = BitmapFactory.decodeFile(path);
+            viewHolder.imageUri.setImageBitmap(bitmap);
+        }
+        else
         {
-            viewHolder.imageUri.setImageResource(R.drawable.infoimage_1);
-        }else if (Integer.parseInt(list.get(position).imageUrl) == -1)
-        {
-            viewHolder.imageUri.setImageResource(R.drawable.infoimage_0);
+
+            Log.d("image", "fail to get from sd card");
+            Log.d("image", path);
+            if (Integer.parseInt(list.get(position).imageUrl) == 1)
+            {
+                viewHolder.imageUri.setImageResource(R.drawable.infoimage_2);
+            } else if (Integer.parseInt(list.get(position).imageUrl) == 0)
+            {
+                viewHolder.imageUri.setImageResource(R.drawable.infoimage_1);
+            }else if (Integer.parseInt(list.get(position).imageUrl) == -1)
+            {
+                viewHolder.imageUri.setImageResource(R.drawable.infoimage_0);
+            }
         }
 
-        String path = list.get(position).imageUrl;
-
-        //"/sdcard/Images/test_image.jpg"
-       /* try{
-            //File imgFile = new  File("/sdcard/image1.jpg");
-            String test= Environment.getExternalStorageDirectory().getAbsolutePath()+"/";
-            Bitmap bitmap = BitmapFactory.decodeFile(test + path);
-            Log.d("imagetest", test+path);
-            viewHolder.imageUri.setImageBitmap(bitmap);
-
-        }catch (NullPointerException e)
-        {
-            Log.d("image", "이미지 실패");
-            Toast.makeText(convertView.getContext(), "이미지가 없습니다.", Toast.LENGTH_SHORT).show();
-        }*/
 
         return convertView;
     }

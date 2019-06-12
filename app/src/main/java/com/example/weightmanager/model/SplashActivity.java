@@ -1,11 +1,15 @@
 package com.example.weightmanager.model;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.weightmanager.R;
 
@@ -23,15 +27,16 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        myDBHelper =new MyDBHelper(this);
+        checkPermission();
+        myDBHelper = new MyDBHelper(this);//디비로부터 권한을 가져옴
         sqlDB = myDBHelper.getWritableDatabase();
-        myDBHelper.onCreate(sqlDB);
+        myDBHelper.onCreate(sqlDB);//테이블이 존재하지 않으면 테이블 생성
 
 
-        String checkinfo = "SELECT * FROM Board;";
-        Cursor cursor = (Cursor)sqlDB.rawQuery(checkinfo, null);
-        cursor.moveToFirst();
-        if(cursor.getCount() == 0)
+        String checkinfo = "SELECT * FROM Board;";//보드의 내용을 봄
+        Cursor cursor = (Cursor) sqlDB.rawQuery(checkinfo, null);
+        cursor.moveToFirst();//첫번째로 이동
+        if (cursor.getCount() == 0)//보드에 내용이 없을시 정보를 넣어줌
         {
             sqlDB.execSQL("INSERT INTO Board (goal, title, text, image) VALUES (-1,'뱃살 멀리하는 생활습관!', '1. 칼로리 마시지 않기\n\n" +
                     "감량을 실패하게 만드는 가장 큰 원인 중 하나는 청량음료를 마시거나 당분이 많은 주스를 마시거나 혹은 저녁 시간에 술을 마신다거나 하는 등 칼로리 음료를 \n" +
@@ -64,11 +69,10 @@ public class SplashActivity extends AppCompatActivity {
 
         }
 
-        checkinfo = "SELECT * FROM Food;";
-        cursor = (Cursor)sqlDB.rawQuery(checkinfo, null);
+        checkinfo = "SELECT * FROM Food;";//Food테이블의 내용을 봄(내용이 없을 시 보드와 동일한 방법으로 내용 넣어줌)
+        cursor = (Cursor) sqlDB.rawQuery(checkinfo, null);
         cursor.moveToFirst();
-        if(cursor.getCount() == 0)
-        {
+        if (cursor.getCount() == 0) {
             sqlDB.execSQL("INSERT INTO Food (name, kcal, carb, protein, fat) VALUES ('백미', 191, 41.04, 3.56, 0.83);");
             sqlDB.execSQL("INSERT INTO Food (name, kcal, carb, protein, fat) VALUES ('현미', 215, 44.42, 4.99, 1.74);");
             sqlDB.execSQL("INSERT INTO Food (name, kcal, carb, protein, fat) VALUES ('감자', 70, 15.71, 1.68, 0.10);");
@@ -89,21 +93,39 @@ public class SplashActivity extends AppCompatActivity {
         }
 
 
-        String sqlSelect = "SELECT * FROM User;" ;
-       cursor = (Cursor) sqlDB.rawQuery(sqlSelect, null);
+        String sqlSelect = "SELECT * FROM User;";//유저 테이블을 봤을 때
+        cursor = (Cursor) sqlDB.rawQuery(sqlSelect, null);
 
-        if (cursor.getCount() == 0)
+        if (cursor.getCount() == 0)//유저의 내용이 없을 시
         {
-            Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+            Intent intent = new Intent(getApplicationContext(), StartActivity.class);//프로필 등록하는 화면으로 넘어감
+            startActivity(intent);
+            finish();
+        } else//유저의 정보가 있을 시
+        {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);//메인화면으로 넘어감
             startActivity(intent);
             finish();
         }
-        else
-        {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
 
+    }
+
+    private void checkPermission() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { // 마시멜로우 버전과 같거나 이상이라면
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                    || checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    Toast.makeText(this, "외부 저장소 사용을 위해 읽기/쓰기 필요", Toast.LENGTH_SHORT).show();
+                }
+
+                requestPermissions(new String[]
+                                {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
+                        2);  //마지막 인자는 체크해야될 권한 갯수
+
+            } else {
+                //Toast.makeText(this, "권한 승인되었음", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

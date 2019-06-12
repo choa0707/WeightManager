@@ -16,11 +16,8 @@ public class AddFood extends AppCompatActivity {
     private Button cancel, register;
     private EditText foodName, foodKcal, foodProtein, foodCarb,foodFat;
     private String name;
-    private int kcal;
-    private int protein;
-    private int carb;
-    private int fat;
-
+    private Double kcal, protein, carb, fat;
+    private int timing;
     MyDBHelper myDBHelper;
     SQLiteDatabase sqlDB;
 
@@ -37,6 +34,8 @@ public class AddFood extends AppCompatActivity {
         foodCarb = (EditText)findViewById(R.id.addfood_carb);
         foodFat = (EditText)findViewById(R.id.addfood_fat);
 
+        Intent intent = getIntent();
+        timing = intent.getExtras().getInt("timing");
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,23 +49,23 @@ public class AddFood extends AppCompatActivity {
                 try
                 {
                     name = foodName.getText().toString();
-                    kcal = Integer.parseInt(foodKcal.getText().toString());
-                    protein = Integer.parseInt(foodProtein.getText().toString());
-                    carb = Integer.parseInt(foodCarb.getText().toString());
-                    fat = Integer.parseInt(foodFat.getText().toString());
+                    kcal = Double.parseDouble(foodKcal.getText().toString());
+                    protein = Double.parseDouble(foodProtein.getText().toString());
+                    carb = Double.parseDouble(foodCarb.getText().toString());
+                    fat = Double.parseDouble(foodFat.getText().toString());
 
                     sqlDB = myDBHelper.getWritableDatabase();
                     String query = "INSERT INTO Food (name, kcal, carb, protein, fat) VALUES ('"+name+"',"+kcal+","+carb+","+protein+","+fat+")";
                     sqlDB.execSQL(query);
                     sqlDB.close();
                     Intent intent = new Intent(getApplicationContext(), SearchFood.class);
-                    intent.putExtra("timing", 0);
+                    intent.putExtra("timing", timing);
                     startActivity(intent);
+                    finish();
                 }catch (NumberFormatException e)
                 {
                     Toast.makeText(AddFood.this, "모든 항목을 입력해주세요.", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
     }

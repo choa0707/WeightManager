@@ -64,12 +64,6 @@ public class SearchAdapter extends BaseAdapter {
         viewHolder.foodFat.setText(Integer.toString((int) list.get(position).fat)+"g");
         viewHolder.foodProtein.setText(Integer.toString((int) list.get(position).protein)+"g");
 
-   //     convertView.setOnClickListener(new View.OnClickListener() {
-     //       @Override
-      //      public void onClick(View v) {
-        //        Toast.makeText(context, list.get(position).name, Toast.LENGTH_LONG).show();
-          //  }
-        //});
 
         return convertView;
     }

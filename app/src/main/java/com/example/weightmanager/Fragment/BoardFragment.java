@@ -48,6 +48,7 @@ public class BoardFragment extends Fragment {
         // 리스트의 모든 데이터를 arraylist에 복사한다.// list 복사본을 만든다.
         arraylist = new ArrayList<BoardData>();
         arraylist.addAll(list);
+        //TODO:check
 
         // 리스트에 연동될 아답터를 생성한다.
         adapter = new BoardAdapter(list, getContext());

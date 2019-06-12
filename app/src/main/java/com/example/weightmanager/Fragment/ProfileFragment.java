@@ -92,12 +92,12 @@ public class ProfileFragment extends Fragment {
         hint_goal_weight = cursor.getDouble(8);
         hint_age = cursor.getInt(10);
 
-        name.setHint(hint_name);
+        name.setText(hint_name);
         spinner.setSelection(hint_gender);
-        height.setHint(Double.toString(hint_heigh));
-        weight.setHint(Double.toString(hint_weight));
-        goal_weight.setHint(Double.toString(hint_goal_weight));
-        age.setHint(Double.toString(hint_age));
+        height.setText(Double.toString(hint_heigh));
+        weight.setText(Double.toString(hint_weight));
+        goal_weight.setText(Double.toString(hint_goal_weight));
+        age.setText(Integer.toString(hint_age));
 
 
         deleteButton.setOnClickListener(new View.OnClickListener(){
@@ -122,11 +122,12 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
+
                 try{
                     s_name = name.getText().toString();
-                    s_height = Integer.parseInt(height.getText().toString());
-                    s_weight = Integer.parseInt(weight.getText().toString());
-                    s_goal_weight = Integer.parseInt(goal_weight.getText().toString());
+                    s_height = Double.parseDouble(height.getText().toString());
+                    s_weight = Double.parseDouble(weight.getText().toString());
+                    s_goal_weight = Double.parseDouble(goal_weight.getText().toString());
                     gender = spinner.getSelectedItem().toString();
                     s_age = Integer.parseInt(age.getText().toString());
                     if(gender.equals("남자"))
@@ -146,11 +147,10 @@ public class ProfileFragment extends Fragment {
                     sqlDB.close();
                     Toast.makeText(getContext(), "수정이 완료 되었습니다.", Toast.LENGTH_LONG).show();
 
-                }catch (NumberFormatException e)
+                }catch (Exception e)
                 {
-                    Toast.makeText(getContext(), "모든 항목을 입력해주세요.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "모든 항목을 올바르게 입력해주세요.", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 
